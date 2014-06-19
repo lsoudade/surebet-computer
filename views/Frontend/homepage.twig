@@ -1,0 +1,47 @@
+{% extends "Layout/main.twig" %}
+
+{% block content %}
+    <form action="{{ url('surebet_process') }}" method="POST" class="form-surebet">
+        <div class="panel panel-default">
+            <div class="panel-heading">Détecter et calculer un surebet</div>
+            <div class="panel-body">
+                <label>Montant maximum à investir</label><input type="text" name="maximum_amount" class="maximum_amount" />
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Cote</th>
+                        <th>Montant à parier</th>
+                        <th>Bénéfice si victoire</th>
+                    </tr>
+                </thead>
+                <tbody data-iteration="2">
+                    <tr class="row-to-process-default row-to-process">
+                        <td><label>Bookmaker <span class="number">1</span></label></td>
+                        <td><input type="text" name="cote[]" class="cote" /></td>
+                        <td><input type="text" name="amount[]" class="amount readonly" readonly="readonly" /></td>
+                        <td><input type="text" name="revenue[]" class="revenue readonly" readonly="readonly" /></td>
+                    </tr>
+                    <tr class="row-to-process">
+                        <td><label>Bookmaker <span class="number">2</span></label></td>
+                        <td><input type="text" name="cote[]" class="cote" /></td>
+                        <td><input type="text" name="amount[]" class="amount readonly" readonly="readonly" /></td>
+                        <td><input type="text" name="revenue[]" class="revenue readonly" readonly="readonly" /></td>
+                    </tr>
+                    <tr class="row-buttons">
+                        <td class="result">
+                            <div class="is-surebet is-surebet-1">Surebet détecté !</div>
+                            <div class="is-surebet is-surebet-1" style="display:none;">Surebet détecté !</div>
+                            <div class="is-surebet is-surebet-0" style="display:none;">Ce n'est pas un surebet</div>
+                        </td>
+                        <td><button class="btn btn-primary btn-add">Ajouter un bookmaker/cote</button></td>
+                        <td><button class="btn btn-success btn-process" type="submit">Calculer</button></td>
+                        <td><button class="btn btn-warning btn-clear" type="submit">Tout effacer</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+{% endblock %}

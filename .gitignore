@@ -1,0 +1,4 @@
+vendor
+log/app.log
+composer.phar
+nbproject

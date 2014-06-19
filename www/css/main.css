@@ -1,0 +1,87 @@
+html {
+    background:#FFFFFF;
+}
+
+.main-container {
+    padding-top:70px;
+}
+
+a {
+    color:#3276B1;
+}
+
+h1, h2 a , h2 a:hover, h2 a:focus {
+    color:#333;
+}
+
+/*form {
+    background:#F8F8F8;
+    padding:20px;
+    margin-bottom:20px;
+}*/
+
+form thead {
+    background:#F5F5F5;
+}
+
+form th {
+    text-align:center;
+}
+
+form td {
+    width:25%;
+}
+
+.form-surebet div {
+    margin-bottom:10px;
+}
+
+.form-surebet .panel-body label ,
+.form-surebet input {
+    display:inline-block;
+    width:200px;
+}
+
+.form-surebet .panel-body label {
+    margin-right:20px;
+}
+
+.form-surebet input {
+    border:solid 2px #357ebd;
+    text-align:center;
+    font-weight:bold;
+}
+
+.form-surebet table input {
+    width:100%;
+}
+
+.form-surebet input.readonly {
+    border:solid 2px #5cb85c;
+    background:#F6F6F6;
+}
+
+.form-surebet .btn {
+    width:100%;
+}
+
+.navbar-default .navbar-brand ,
+.navbar-default .navbar-brand:focus , 
+.navbar-default .navbar-brand:hover ,
+.navbar-default .navbar-brand:active {
+    font-size:32px;
+    font-weight:bold;
+    color:#3276B1;
+}
+
+.no-margin {
+    margin:0px;
+}
+
+.input-error {
+    border-color:red !important;
+}
+
+td.result .is-surebet {
+    
+}
