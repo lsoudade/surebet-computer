@@ -18,7 +18,6 @@ logger.level = Logger::MAX_LEVEL
 
 after "deploy:finalize_update" do
   run "cd #{release_path} && php /var/www/composer.phar install"
-  run "mv #{release_path}/config/persistence.inc.php.sample #{release_path}/config/persistence.inc.php"
   run "rm #{release_path}/www/index_dev.php"
 end
 

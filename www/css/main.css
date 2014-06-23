@@ -98,3 +98,8 @@ tr.row-results td {
     text-align:center;
     vertical-align:middle !important;
 }
+
+p.disclaimer {
+    font-style:italic;
+    font-size:11px;
+}
