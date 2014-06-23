@@ -11,6 +11,9 @@ RewriteEngine on
 
 Options -MultiViews
 
+RewriteCond %{HTTP_HOST} ^calcul-surebet.fr$
+RewriteRule (.*) http://www.calcul-surebet.fr/$1 [R=301,L] 
+
 #RewriteBase /path/to/app
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
