@@ -56,24 +56,41 @@ $(document).ready(function () {
                 success: function(data) {
                     var classn = data.isSurebet ? 1 : 0;
                     $('td.result .is-surebet-' + classn).show();
+                    $('tr.row-results').show();
+                    
                     /*$('td.result_sum_inverse').text(data.sumInverse);*/
                     $('td.result_percent_amount span').text(data.percentAmount);
                     $('td.result_global_amount span').text(data.globalAmount);
-                    $('tr.row-results').show();
                     
-                    // Update amounts to bet
-                    var i = 0;
-                    $.each(data.amounts, function() {
-                        $('input[name="amount['+ i +']"]').val(parseFloat(this).toFixed(2));
-                        i++;
-                    });
-                    
-                    // Update revenues
-                    var i = 0;
-                    $.each(data.revenues, function() {
-                        $('input[name="revenue['+ i +']"]').val(parseFloat(this).toFixed(2));
-                        i++;
-                    });
+                    if ( classn === 1 ) {
+                        // Update amounts to bet
+                        var i = 0;
+                        $.each(data.amounts, function() {
+                            $('input[name="amount['+ i +']"]').val(parseFloat(this).toFixed(2));
+                            i++;
+                        });
+
+                        // Update revenues
+                        var i = 0;
+                        $.each(data.revenues, function() {
+                            $('input[name="revenue['+ i +']"]').val(parseFloat(this).toFixed(2));
+                            i++;
+                        });
+                    } else {
+                        // Update amounts to bet
+                        var i = 0;
+                        $.each(data.amounts, function() {
+                            $('input[name="amount['+ i +']"]').val('');
+                            i++;
+                        });
+
+                        // Update revenues
+                        var i = 0;
+                        $.each(data.revenues, function() {
+                            $('input[name="revenue['+ i +']"]').val('');
+                            i++;
+                        });
+                    }
                 }
             });
         } else {
@@ -100,7 +117,7 @@ $(document).ready(function () {
         }
     });
     
-    $('table').on('keydown', '.cote', function(e){console.log(this);
+    $('table').on('keydown', '.cote', function(e){
         $(this).removeClass('input-error');
         $('tr.row-results').hide();
         $('td.result .is-surebet').hide();
