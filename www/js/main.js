@@ -1,12 +1,24 @@
 $(document).ready(function () {
+    
+    var clearForm = function() {
+        $('input').val('');
+        $('td.result .is-surebet').hide();
+        $('tr.row-results').hide();
+    }
+    
     $('.btn-add').click(function(e){
         e.preventDefault();
        
         var row          = $('.row-to-process-default').clone();
-        var newIteration = parseInt($('tbody').data('iteration'))+1;
+        var iteration    = parseInt($('tbody').data('iteration'));
+        var newIteration = iteration + 1;
                
         $(row).removeClass('row-to-process-default');
         $(row).find('span.number').replaceWith(newIteration);
+        $(row).find('.cote').attr('name', 'cote[' + iteration + ']');
+        $(row).find('.cote').val('');
+        $(row).find('.amount').attr('name', 'amount[' + iteration + ']');
+        $(row).find('.revenue').attr('name', 'revenue[' + iteration + ']');
         $(row).insertBefore('.row-buttons');
        
         $('tbody').data('iteration', newIteration);
@@ -34,6 +46,8 @@ $(document).ready(function () {
         });
        
         if ( errors === 0 ) {
+            $('td.result .is-surebet').hide();
+            
             $.ajax({
                 type: 'POST',
                 url: $(this).attr('action'),
@@ -42,6 +56,24 @@ $(document).ready(function () {
                 success: function(data) {
                     var classn = data.isSurebet ? 1 : 0;
                     $('td.result .is-surebet-' + classn).show();
+                    /*$('td.result_sum_inverse').text(data.sumInverse);*/
+                    $('td.result_percent_amount span').text(data.percentAmount);
+                    $('td.result_global_amount span').text(data.globalAmount);
+                    $('tr.row-results').show();
+                    
+                    // Update amounts to bet
+                    var i = 0;
+                    $.each(data.amounts, function() {
+                        $('input[name="amount['+ i +']"]').val(parseFloat(this).toFixed(2));
+                        i++;
+                    });
+                    
+                    // Update revenues
+                    var i = 0;
+                    $.each(data.revenues, function() {
+                        $('input[name="revenue['+ i +']"]').val(parseFloat(this).toFixed(2));
+                        i++;
+                    });
                 }
             });
         } else {
@@ -58,15 +90,19 @@ $(document).ready(function () {
     
     $('.maximum_amount').keydown(function(e){
         $(this).removeClass('input-error');
+        $('tr.row-results').hide();
+        $('td.result .is-surebet').hide();
     });
     
-    $('.cote').blur(function(e){
+    $('table').on('blur', '.cote', function(e){
         if ( $(this).val().length !== 0 ) {
             $(this).removeClass('input-error');
         }
     });
     
-    $('.cote').keydown(function(e){
+    $('table').on('keydown', '.cote', function(e){console.log(this);
         $(this).removeClass('input-error');
+        $('tr.row-results').hide();
+        $('td.result .is-surebet').hide();
     });
 });

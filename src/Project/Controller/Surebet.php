@@ -21,12 +21,22 @@ class Surebet extends Controller
         $response['isSurebet'] = ($sumInverse < 1);
         
         if ( $response['isSurebet'] ) {
-            $response['isSurebet'] = (int) $response['isSurebet'];
-            $response['amounts']   = array();
+            $response['isSurebet']     = (int) $response['isSurebet'];
+            $response['sumInverse']    = number_format(round($sumInverse, 2), 2);
+            $response['percentAmount'] = number_format(round(((1 - $sumInverse) * 100), 2), 2) . '%';
+            $response['globalAmount']  = 0;
+            $response['amounts']       = array();
+            $response['revenues']      = array();
         }
         
         foreach ( $data['cote'] as $i => $cote ) {
-            $response['amounts'][$i] = number_format(round($maximumAmount/$cote, 2), 2);
+            $amount = number_format(round($maximumAmount/$cote, 2), 2);
+            $response['globalAmount'] += $amount;
+            $response['amounts'][$i]   = $amount;
+        }
+        
+        foreach ( $data['cote'] as $i => $cote ) {
+            $response['revenues'][$i] = $response['amounts'][$i] * $cote - $response['globalAmount'];
         }
         
         return new Response(json_encode($response));

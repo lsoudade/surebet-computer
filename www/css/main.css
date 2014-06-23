@@ -32,10 +32,6 @@ form td {
     width:25%;
 }
 
-.form-surebet div {
-    margin-bottom:10px;
-}
-
 .form-surebet .panel-body label ,
 .form-surebet input {
     display:inline-block;
@@ -82,6 +78,23 @@ form td {
     border-color:red !important;
 }
 
+td.result {
+    text-align:center;
+    vertical-align:middle;
+}
+
 td.result .is-surebet {
-    
+    font-weight:bold;
+    font-style:italic;
+    font-size:26px;
+    color:red;
+}
+
+td.result .is-surebet-1 {
+    color:#47A447;
+}
+
+tr.row-results td {
+    text-align:center;
+    vertical-align:middle !important;
 }
